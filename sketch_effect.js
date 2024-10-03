@@ -18,7 +18,7 @@ schrijfNaam("pietje");
 //---------------------
 
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(800, 400);
   background(220);
 }
 
@@ -35,43 +35,27 @@ myArray = [
 ];
 
 myArray2 = [
-  [1, 0, 2, 0, 0, 1, 2],
-  [0, 1, 1, 1, 0, 1, 2],
-  [1, 0, 2, 0, 0, 1, 2],
-  [1, 1, 1, 2, 2, 2, 0],
-  [1, 1, 1, 2, 2, 2, 1],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+  [1, 2, 1, 0, 0, 0, 0, 0, 0, 0],
+  [0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 ];
 
 console.log(myArray2[1][2]);
 
 let counter = 0;
+let timer = 0;
 
 function draw() {
   background(200);
   counter = counter + 1;
+  timer++;
+  if (timer > 5) {
+    timer = 0;
+  }
   textSize(30);
   text(counter, 10, 300);
-  // rect(0,0,50);
-  // rect(50,0,50);
-  // rect(100,0,50);
-  // rect(0,50,50);
-  // rect(50,50,50);
-  // rect(100,50,50);
-  // rect(0,100,50);
-  // rect(50,100,50);
-  // rect(100,100,50);
-  //   textSize(20);
-  //   for (y = 0; y < 7; y++) {
-  //     for (x = 0; x < 7; x++) {
-  //       rect(x * 50, y * 50, 50);
-  //       text(x+"-"+y, 50 * x, 50* y);
-  //     }
-  //   }
-
-  //   for (i = 0; i < myArray.length; i++) {
-  //     fill(myArray[i]);
-  //     rect(i * 50, 0, 50);
-  //   }
 
   for (y = 0; y < myArray2.length; y++) {
     for (x = 0; x < myArray2[y].length; x++) {
@@ -85,10 +69,20 @@ function draw() {
         fill("black");
       }
 
-      if (counter > x + y * 7) {
+      if (counter > x + y * 50) {
         rect(x * 50, y * 50, 50);
         text(myArray2[y][x], x * 50, y * 50);
       }
+
+      if (counter > 400) {
+        counter = 0;
+      }
+    }
+
+    if (timer == 0) {
+      let temp = myArray2[y][8];
+      myArray2[y].unshift(temp);
+      myArray2[y].pop();
     }
   }
 }
