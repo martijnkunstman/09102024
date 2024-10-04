@@ -1,38 +1,7 @@
-let naam = "martijn";
-
-if (naam == "martijn") {
-  console.log("hoi martijn");
-}
-
-for (let i = 0; i < 10; i++) {
-  console.log("hoi martijn" + i);
-}
-
-let arrayNamen = ["martijn", "jeroen", "jelle"];
-
-function schrijfNaam(naam) {
-  console.log(naam);
-}
-
-schrijfNaam("pietje");
-//---------------------
-
 function setup() {
   createCanvas(800, 400);
   background(220);
 }
-
-myArray = [
-  "red",
-  "green",
-  "blue",
-  "purple",
-  "orange",
-  "pink",
-  "brown",
-  "black",
-  "white",
-];
 
 myArray2 = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -42,34 +11,24 @@ myArray2 = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 ];
 
-console.log(myArray2[1][2]);
-
 let counter = 0;
 let timer = 0;
 
 function draw() {
   background(200);
-  counter = counter + 1;
-  timer++;
+  counter = counter + 1;//snelheid van opbouwen van de sprite
+  timer++;//snelheid van bewegen van de sprite
   if (timer > 5) {
     timer = 0;
-  }
+  }S
   textSize(30);
   text(counter, 10, 300);
 
   for (y = 0; y < myArray2.length; y++) {
     for (x = 0; x < myArray2[y].length; x++) {
-      if (myArray2[y][x] == 0) {
-        fill("red");
-      }
-      if (myArray2[y][x] == 1) {
-        fill("green");
-      }
-      if (myArray2[y][x] == 2) {
-        fill("black");
-      }
+      fill(defineColorByNumber(myArray2[y][x]));
 
-      if (counter > x + y * 50) {
+      if (counter > x + y * 50) {//dit zogt er voor dat de sprite langzaam opbouwt
         rect(x * 50, y * 50, 50);
         text(myArray2[y][x], x * 50, y * 50);
       }
@@ -80,9 +39,24 @@ function draw() {
     }
 
     if (timer == 0) {
-      let temp = myArray2[y][8];
-      myArray2[y].unshift(temp);
+      //deze code zorgt er voor dat de sprite beweegt
+      let lastValueOffArray = myArray2[y][myArray2[y].length - 1];
+      myArray2[y].unshift(lastValueOffArray);
       myArray2[y].pop();
     }
   }
+}
+
+function defineColorByNumber(number) {
+  let color = "white";
+  if (number == 0) {
+    color = "red";
+  }
+  if (number == 1) {
+    color = "green";
+  }
+  if (number == 2) {
+    color = "black";
+  }
+  return color;
 }
