@@ -20,7 +20,7 @@ function draw() {
   timer++;//snelheid van bewegen van de sprite
   if (timer > 5) {
     timer = 0;
-  }S
+  }
   textSize(30);
   text(counter, 10, 300);
 
